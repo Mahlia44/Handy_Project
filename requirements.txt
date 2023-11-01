@@ -1,11 +1,7 @@
             Python:
 tkinter
 numpy
-matplotlib.pyplot
-matplotlib.backends.backend_tkagg
-matplotlib.animation
-os
-argparse
+matplotlib
             
             C:
 <stdio.h>

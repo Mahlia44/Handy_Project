@@ -6,7 +6,8 @@ from matplotlib.animation import FuncAnimation
 import os
 import argparse
 
-from helpers.fen_services import readFile, moveButton
+from helpers.fen_services import readFile
+from helpers.fen_change import moveButton
 from helpers.fen_plot import graphTemplate, animation
 from helpers.result_scenario import resultScenario
 from helpers.fen_txt import remindersFen3
@@ -16,6 +17,7 @@ parser.add_argument("--fileCursors", type=str, help="fichier C", default="in_C/r
 parser.add_argument("--fileBasic", type=str, help="type of scenario chosen", default="in_C/results_python_file.txt")
 parser.add_argument("--scenario", type=str, help="type of scenario chosen", default="eg")
 
+ANIMATE=False
 
 def animate_c(k, XC, XE, N, W):
 
@@ -100,6 +102,19 @@ if __name__=='__main__':
     canvas = FigureCanvasTkAgg(fig, master=fen_princ)
     canvas.get_tk_widget().place(x=0, y=256)
 
-    ani = FuncAnimation(fig = fig, func = animate_c, fargs = (XC_c,XE_c,N_c,W_c), frames = range(time//skip), interval = 1, repeat = False)
-              
+    if ANIMATE:
+        ani = FuncAnimation(fig = fig, func = animate_c, fargs = (XC_c,XE_c,N_c,W_c), frames = range(time//skip), interval = 1, repeat = False)
+    else:
+        ax[1].plot(t, XC_c, color = 'b', label = "Commoner population")
+        ax[1].plot(t, XE_c, color = 'r', label = "Elite population")
+        ax[1].plot(t, N_c, color = 'g', label = "Nature")
+        ax[1].plot(t, W_c, color = 'grey', label = "Wealth")
+        ax[0].legend(loc='upper left', bbox_to_anchor=(-0.165, -0.069),
+        fancybox=True, shadow=True, ncol=5, fontsize=4.2)
+        title, explanation = resultScenario(XC_c, N_c)
+        title_label = Label(fen_princ, text=title, bg="honeydew", font=('Yu Gothic',50, "bold"), borderwidth=4, relief="sunken")
+        title_label.place(x=420, y=90)
+        explanation_label= Label(fen_princ, text = explanation, fg= 'green', bg="honeydew", font=('Yu Gothic',28, "bold"), justify=RIGHT)
+        explanation_label.place(x=750, y=170)
+
     fen_princ.mainloop()

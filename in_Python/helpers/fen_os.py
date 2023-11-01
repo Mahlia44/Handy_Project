@@ -1,6 +1,7 @@
 # Helper to go from Python to C using terminal instructions.
 
 import os
+import sys
 
 def Py2C(fen_princ, stock:list):
     """Terminal instructions to run HANDY_calculs.c.
@@ -18,13 +19,15 @@ def Py2C(fen_princ, stock:list):
 def sendScenario(fen_princ, scenario:str):
     """Send file path.
     """
+
     path = 0
+    
     if scenario == "eg":
-        path = ['eg_f', "Text/HANDY_egalitarian_basic.txt"]
+        path = ['eg_f', "Text/HANDY_egalitarian_basic.txt", f"{sys.executable}"]
     if scenario == "eq":
-        path = ['eq_f', "Text/HANDY_equitable_basic.txt"]
+        path = ['eq_f', "Text/HANDY_equitable_basic.txt", f"{sys.executable}"]
     if scenario == "un":
-        path = ['un_f', "Text/HANDY_unequal_basic.txt"]
+        path = ['un_f', "Text/HANDY_unequal_basic.txt", f"{sys.executable}"]
     Py2C(fen_princ, path)
 
 

@@ -3,10 +3,11 @@
 from tkinter import *
 from PIL import ImageTk, Image
 from helpers.fen_os import sendScenario
-from helpers.fen_services import moveButton, cleanTk
+from helpers.fen_services import cleanTk
 from helpers.fen_txt import titleFen1, welcomeTxtFen1, question1Fen1, summaryTxtFen1, question2Fen1
 
-def startScenario(scenario:str, w1, w2, w3):
+
+def startScenario(scenario, w1, w2, w3):
     """ Summary text annouces which scenario is chosen.
     Path to HANDY_calculs.c.
     """
@@ -73,9 +74,8 @@ def introduction():
     go_button = Button(fen_princ, text = "GO!", fg= 'darkred',font=('Yu Gothic',50, "bold"), command = lambda:questionXE(titlelabel, subtitlelabel, welcome_label, go_button))
     go_button.place(x= 830, y=650)
 
+def init_fen1(reset=False):
 
-
-if __name__=='__main__':
     """ First Tkinter interactive interface.
     Goals: Contain explanations of project.
            Ask questions to user to lead to one of three scenarios: egalitarian, equitable or unequal.
@@ -83,12 +83,16 @@ if __name__=='__main__':
            End by destroying window and C file continues. """
 
     # Creation of Tkinter window
-    fen_princ = Tk()
+    global fen_princ
+    if reset:
+        fen_princ = Toplevel()
+    else:
+        fen_princ = Tk()
     fen_princ.attributes('-fullscreen', True)
     fen_princ.configure(bg="navajowhite")
 
     # Button to quit
-    moveButton(fen_princ, 1, "")
+    Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:exit()).place(x=1155, y=25)
 
     # Display image
     canvas= Canvas(fen_princ, width= 500 , height= 520, bg='navajowhite', highlightthickness=0)

@@ -7,58 +7,6 @@ from tkinter import *
 from helpers.fen_os import sendCursors
 from helpers.fen_txt import descrCCFen2, hintsFen2
 
-def quit(fen_princ:Tk):
-    """Immediately ends program by destroying window.
-
-    Args:
-        fen_princ (Tk): displayed window.
-    """
-
-    fen_princ.destroy()
-
-def backFen1(fen_princ:Tk):
-    """Back to window 1, Fen1.
-
-    Args:
-        fen_princ (Tk): displayed window.
-    """
-
-    os.system("python in_Python/fen1.py")
-    fen_princ.destroy()
-
-def backFen2(fen_princ:Tk, scenario:str):
-    """ BAack to window 2, Fen2.
-
-    Args:
-        fen_princ (Tk): displayed window.
-        scenario (str): type of scenario.
-    """
-
-    if scenario == "eg" :
-        os.system("python in_Python/fen2.py --fileName in_C/results_python_file.txt --scenario eg")
-    if scenario == "eq" :
-        os.system("python in_Python/fen2.py --fileName in_C/results_python_file.txt --scenario eq")
-    if scenario == "un" :
-        os.system("python in_Python/fen2.py --fileName in_C/results_python_file.txt --scenario un")
-    fen_princ.destroy()
-
-def moveButton(fen_princ:Tk, n:int,  scenario:str):
-    """Buttons always displayed on right top to move from
-    window to another.
-
-    Args:
-        fen_princ (Tk): displayed window.
-        n (int): number of actual window.
-        scenario (str): type of scenario.
-    """
-
-    quit_button = Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:quit(fen_princ)).place(x=1155, y=25)
-    if n==2:
-        home_button = Button(fen_princ, text = "HOME", bg='lightskyblue',command = lambda:backFen1(fen_princ)).place(x=1150, y=60)
-    if n==3:
-        home_button = Button(fen_princ, text = "HOME", bg="navajowhite",command = lambda:backFen1(fen_princ)).place(x=1150, y=60)
-        again_button = Button(fen_princ, text = "NEW VALUES",bg='lightgreen', command = lambda:backFen2(fen_princ, scenario)).place(x=1130, y=95)
-
 def cleanTk(w1, w2, w3, w4):
     """Cleans window from old widgets.
 

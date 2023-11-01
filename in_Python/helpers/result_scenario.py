@@ -56,12 +56,16 @@ def resultScenario(XC:list,N:list):
         max1 = max(N[i0+1:])
         iM = np.where(N==max1)[0][0]
         # second zero after max
-        zero_2 = np.where(N[iM+1:]==zero)
+        zero_2 = np.where(N[iM+1:]<=(1**-4))
         i1 = zero_2[0][0] 
         # second max
         max2 = max(N[i1+1:])
         if abs(max1-max2)<0.5: #if consecutive maximums are very closed
-            scenario = 3 #reversible type-N
+            if XC[998]<=0.1: 
+                scenario = 2 # type-L
+            else:
+                scenario = 3 #reversible type-N
+
         elif N[998]==0 : # nature is zero at the end
             scenario = 1  # type-N
         else :
