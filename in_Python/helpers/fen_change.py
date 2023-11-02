@@ -1,4 +1,4 @@
-import os
+import sys
 from tkinter import *
 
 from fen2 import init_fen2
@@ -37,7 +37,7 @@ def moveButton(fen_princ:Tk, n:int,  scenario:str):
         scenario (str): type of scenario.
     """
 
-    quit_button = Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:quit()).place(x=1155, y=25)
+    # quit_button = Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:sys.exit()).place(x=1155, y=25)
     if n==2:
         home_button = Button(fen_princ, text = "HOME", bg='lightskyblue',command = lambda:backFen1(fen_princ)).place(x=1150, y=60)
     if n==3:

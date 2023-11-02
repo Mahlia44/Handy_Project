@@ -12,7 +12,7 @@ def Py2C(fen_princ, stock:list):
     """
 
     os.system("gcc in_C/HANDY_calculs.c -o in_C/handy_calculs_exe")
-    os.system("./in_C/handy_calculs_exe " + stock[0] + " " + stock[1])
+    os.system("./in_C/handy_calculs_exe " + stock[0] + " " + stock[1] + " " + stock[2])
     fen_princ.destroy()
 
 
@@ -36,9 +36,9 @@ def sendCursors(fen_princ, scenario, valuecursor):
     """
     cursor = 0
     if scenario == "eg":
-        cursor = ["eg_c", str(valuecursor)]
+        cursor = ["eg_c", f"{valuecursor}", f"{sys.executable}"]
     if scenario == "eq":
-        cursor = ["eq_c", str(valuecursor)]
+        cursor = ["eq_c", f"{valuecursor}", f"{sys.executable}"]
     if scenario == "un":
-        cursor = ["un_c", str(valuecursor)]
+        cursor = ["un_c", f"{valuecursor}", f"{sys.executable}"]
     Py2C(fen_princ, cursor)

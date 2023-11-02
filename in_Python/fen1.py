@@ -2,6 +2,7 @@
 
 from tkinter import *
 from PIL import ImageTk, Image
+import sys
 from helpers.fen_os import sendScenario
 from helpers.fen_services import cleanTk
 from helpers.fen_txt import titleFen1, welcomeTxtFen1, question1Fen1, summaryTxtFen1, question2Fen1
@@ -92,7 +93,7 @@ def init_fen1(reset=False):
     fen_princ.configure(bg="navajowhite")
 
     # Button to quit
-    Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:exit()).place(x=1155, y=25)
+    Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:sys.exit()).place(x=1155, y=25)
 
     # Display image
     canvas= Canvas(fen_princ, width= 500 , height= 520, bg='navajowhite', highlightthickness=0)

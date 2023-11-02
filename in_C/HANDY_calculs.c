@@ -265,8 +265,15 @@ Returns: a text file containing datas over time.
     // Type of scenario
     const char * condition = argv[1] ;
 
-    // Give python executable
-    char * python_exe = argv[3] ;
+    // Give python executable as const char
+    const char * python_exe = argv[3];
+    // Make it a char for Fen2
+    char python_exe2[500];
+    strcpy(python_exe2, python_exe);
+    // Make it a char for Fen3
+    char python_exe3[500];
+    strcpy(python_exe3, python_exe);
+    
 
     double d_optimal = 6.67e-6 ;
 
@@ -280,7 +287,7 @@ Returns: a text file containing datas over time.
     // Case from file
     if ((strcmp(condition, eg_f) == 0) || (strcmp(condition, eq_f) == 0) || (strcmp(condition, un_f) == 0)) {
         const char * file_path = argv[2] ;
-        char * scenario ;
+        const char * scenario ;
         int x_factor ;
         int w_factor ;
         if (strcmp(condition, eg_f) == 0) {
@@ -301,11 +308,13 @@ Returns: a text file containing datas over time.
         readFile(file_path, tab_variables, &parameters, size);
         runAuto(tab_variables, &parameters, t, x_factor, w_factor);
         finalFile("in_C/results_python_file.txt", tab_variables, &parameters, t, x_factor, w_factor) ;
-        char runFen2[500] = " in_Python/fen2.py --fileName in_C/results_python_file.txt --scenario ";
-        strcat(python_exe, runFen2);
-        printf("%s", python_exe) ;
-        strcat(python_exe, scenario);
-        system(runFen2) ;
+
+        const char runFen2[500] = " in_Python/fen2.py --fileName in_C/results_python_file.txt --scenario ";
+        strcat(python_exe2, runFen2);
+        strcat(python_exe2, scenario);
+        // printf("Concatenated string: %s\n", python_exe2);
+        system(python_exe2) ;
+
     }
     // Case from cursor
     else {
@@ -343,10 +352,10 @@ Returns: a text file containing datas over time.
         valuesDefault(tab_variables, &parameters, scenario, CC_c, d_optimal);
         runAuto(tab_variables, &parameters, t, x_factor, w_factor);
         finalFile("in_C/results_python_cursors.txt", tab_variables, &parameters, t, x_factor, w_factor) ;
-        char runFen3[500] = " in_Python/fen3.py --fileCursors in_C/results_python_cursors.txt --fileBasic in_C/results_python_file.txt --scenario ";
-        strcat(python_exe, runFen3);
-        strcat(python_exe, scenario);
-        system(runFen3) ;
+        const char runFen3[500] = " in_Python/fen3.py --fileCursors in_C/results_python_cursors.txt --fileBasic in_C/results_python_file.txt --scenario ";
+        strcat(python_exe3, runFen3);
+        strcat(python_exe3, scenario);
+        system(python_exe3) ;
     }
 
     return 0;

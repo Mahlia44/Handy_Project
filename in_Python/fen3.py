@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
-import os
+import sys
 import argparse
 
 from helpers.fen_services import readFile
@@ -52,6 +52,9 @@ if __name__=='__main__':
     fen_princ = Tk()
     fen_princ.attributes('-fullscreen', True)
     fen_princ.configure(bg="honeydew")
+
+    quit_button = Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:sys.exit()).place(x=1155, y=25)
+
     moveButton(fen_princ, 3, args.scenario)
 
     # Stocking four variables and carying capacity from both first and cursors file

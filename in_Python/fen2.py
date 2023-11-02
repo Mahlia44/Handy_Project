@@ -1,14 +1,16 @@
 from tkinter import *
 import numpy as np
+import sys
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 import argparse
 
-#from fen1 import init_fen1
 from helpers.fen_services import readFile, cursor_CC
 from helpers.fen_plot import graphTemplate, animation
 from helpers.fen_txt import welcomeTxtFen2
+
+from fen1 import init_fen1
 
 parser = argparse.ArgumentParser(description="File for optimal equilibrium of chosen scenario sent from C")
 parser.add_argument("--fileName", type=str, help="fichier C", default="in_C/results_python_file.txt")
@@ -36,10 +38,8 @@ def init_fen2(args):
     fen_princ = Tk()
     fen_princ.attributes('-fullscreen', True)
     fen_princ.configure(bg="azure")
-    # def homefunc():
-    #     init_fen1()
-    #     fen_princ.destroy()
-    # home_button = Button(fen_princ, text = "HOME", bg='lightskyblue',command = homefunc).place(x=1150, y=60)
+
+    quit_button = Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:sys.exit()).place(x=1155, y=25)
 
     # Displayed text according to scenario chosen in previous window
     # Recall of starting values and CC optimal
