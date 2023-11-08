@@ -1,7 +1,6 @@
 # First displayed window.
 
 from tkinter import *
-from PIL import ImageTk, Image
 import sys
 from helpers.fen_os import sendScenario
 from helpers.fen_services import cleanTk
@@ -68,7 +67,7 @@ def introduction():
 
     titlelabel = Label(fen_princ, text=title, fg= 'darkred', bg="navajowhite", font=('Yu Gothic',50, "bold")).pack()
     subtitlelabel = Label(fen_princ, text=subtitle, fg= 'darkred', bg="navajowhite", font=('Yu Gothic',25, "bold")).pack()
-    welcome_label = Label(fen_princ,bg="navajowhite", text = welcomeTxt, font=('Yu Gothic',15, "bold"))
+    welcome_label = Label(fen_princ,fg= 'black',bg="navajowhite", text = welcomeTxt, font=('Yu Gothic',15, "bold"))
     welcome_label.place(x=650, y=250)
 
     # Start with questions
@@ -94,16 +93,16 @@ def init_fen1(reset=False):
 
     # Button to quit
     Button(fen_princ, text = "QUIT", borderwidth=0, bg="lightcoral",command = lambda:sys.exit()).place(x=1155, y=25)
-
-    # Display image
-    canvas= Canvas(fen_princ, width= 500 , height= 520, bg='navajowhite', highlightthickness=0)
+    
+    # Create a canvas
+    canvas = Canvas(fen_princ, width=500, height=520, bg='navajowhite', highlightthickness=0)
     canvas.place(x=100, y=250)
-    img= (Image.open("Images/fire.png"))
-    #Resize image
-    resized_image= img.resize((464,472), Image.ANTIALIAS)
-    new_image= ImageTk.PhotoImage(resized_image)
-    #Add image to the Canvas Items
-    canvas.create_image(20, 20,anchor=NW,image=new_image)
+    # Load the image using tkinter's PhotoImage
+    image = PhotoImage(file="Images/fire.png")
+    label = Label(fen_princ, image=image, bg='navajowhite')
+    label.image = image  # Keep a reference to the image to prevent it from being garbage collected
+    # Place the label on the canvas
+    label.place(x=100, y=250)
 
     # Only one function called because buttons call functions themselves
     introduction()

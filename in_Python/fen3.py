@@ -29,7 +29,7 @@ def animate_c(k, XC, XE, N, W):
     # At the end, displaying results and analysis of results
     if k==(time//skip)-1:
         title, explanation = resultScenario(XC, N)
-        title_label = Label(fen_princ, text=title, bg="honeydew", font=('Yu Gothic',50, "bold"), borderwidth=4, relief="sunken")
+        title_label = Label(fen_princ, text=title, fg= 'black', bg="honeydew", font=('Yu Gothic',50, "bold"), borderwidth=4, relief="sunken")
         title_label.place(x=420, y=90)
         explanation_label= Label(fen_princ, text = explanation, fg= 'green', bg="honeydew", font=('Yu Gothic',28, "bold"), justify=RIGHT)
         explanation_label.place(x=750, y=170)
